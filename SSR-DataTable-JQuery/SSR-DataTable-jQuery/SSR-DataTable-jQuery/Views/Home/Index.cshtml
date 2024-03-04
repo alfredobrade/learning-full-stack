@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row">
+    <table id="tbempleado" class="table table-striped w-100">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+@section Scripts{
+   
+    <!-- Enlaces a los archivos CSS de DataTables -->
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet" />
+
+
+    <!-- jquery? -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Enlaces a los archivos JavaScript de DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+   
+    <script>
+        $(document).ready(function() {
+            $('#tbempleado').DataTable({
+                "processing": true,//par qe aparezca el mensaje de processing
+                "serverSide": true,//para que traiga del servidor los datos
+                //responsive: true // Habilita la funcionalidad de DataTables Responsive
+                "ajax":{
+                    "url": "@Url.Action("ObtenerEmpleado","Home")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "nombre" },
+                    { "data": "correoElectronico" },
+                    { "data": "domicilio" },
+                    { "data": "telefono" },
+                ]
+
+            }); 
+        });
+    </script>
+
+}
+
+}
