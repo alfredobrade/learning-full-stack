@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using OdeToFood.Data.Entities;
 using OdeToFood.Data.Services;
@@ -41,6 +42,12 @@ namespace OdeToFood.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Restaurant restaurant)
         {
+            //if (String.IsNullOrEmpty(restaurant.Name))
+            //{
+            //    ModelState.AddModelError(nameof(restaurant.Name), "The name is required");
+            //}
+
+
             if (ModelState.IsValid)
             {
                 _data.Add(restaurant);
