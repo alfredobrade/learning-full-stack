@@ -35,8 +35,20 @@ namespace OdeToFood.Data.Services
         public void Update(Restaurant restaurant)
         {
             //_context.Restaurants.AddOrUpdate(restaurant);
-            var entry = _context.Entry(restaurant);
-            entry.State = System.Data.Entity.EntityState.Modified;
+
+            //this is the way to do Optimistic Concurrency and don't let the users override the others code. (the last to click the update wins)
+            var entry = _context.Entry(restaurant);//begin the tracking
+            entry.State = System.Data.Entity.EntityState.Modified; //the object is in a modified state
+
+
+
+            _context.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            var restaurant = _context.Restaurants.Find(id);
+            _context.Restaurants.Remove(restaurant);
             _context.SaveChanges();
         }
     }

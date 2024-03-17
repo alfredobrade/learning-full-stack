@@ -24,15 +24,16 @@ namespace OdeToFood.Web
             builder.RegisterControllers(typeof(MvcApplication).Assembly); //Le decimos a la libreria donde buscar el Assembly de la aplicacion web MVC
 
 
-            builder.RegisterType<InMemomoryRestaurantData>().As<IRestaurantData>() //aca creamos la referencia
-                .SingleInstance();//solo para prueba NO SIRVE PARA MULTIPLES USUARIOS - singleton
-                //.InstancePerRequest();
+            //builder.RegisterType<InMemomoryRestaurantData>().As<IRestaurantData>() //aca creamos la referencia
+            //    .SingleInstance();//solo para prueba NO SIRVE PARA MULTIPLES USUARIOS - singleton
+            //    //.InstancePerRequest();
 
 
-            //builder.RegisterType<SqlRestaurantData>()
-            //    .As<IRestaurantData>()
-            //    //.SingleInstance();
-            //    .InstancePerRequest();
+            builder.RegisterType<SqlRestaurantData>()
+                .As<IRestaurantData>()
+                //.SingleInstance();
+                .InstancePerRequest();
+            builder.RegisterType<ProjectDBContext>().InstancePerRequest();
 
 
 

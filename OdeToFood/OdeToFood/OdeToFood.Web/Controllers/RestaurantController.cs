@@ -80,6 +80,26 @@ namespace OdeToFood.Web.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var model = _data.Get(id);
+            if (model == null)
+            {
+                return View("NotFound");
+
+            }
+            return View(model);
+        }
+
+        [HttpPost] //in this case we don't use HttpDelete cuz the browser work like this with the forms
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, FormCollection form) //the second parameter is only for overloading the method (but it also have a use)
+        {
+                _data.Delete(id);
+                return RedirectToAction("Index");
+        }
+
 
     }
 }
