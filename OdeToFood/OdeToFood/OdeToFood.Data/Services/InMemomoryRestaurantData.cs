@@ -30,6 +30,11 @@ namespace OdeToFood.Data.Services
             _restaurants.Add(restaurant);
         }
 
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Restaurant Get(int id)
         {
             return _restaurants.FirstOrDefault(r => r.Id == id);
